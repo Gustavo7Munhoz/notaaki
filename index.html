@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Notas</title>
+</head>
+<body>
+
+  <h1>Calculadora de Notas</h1>
+
+  <div>
+    <label for="nota1">Nota 1:</label>
+    <input type="number" id="nota1" placeholder="Digite a nota 1" step="0.1">
+
+    <label for="nota2">Nota 2:</label>
+    <input type="number" id="nota2" placeholder="Digite a nota 2" step="0.1">
+
+    <button id="btnCalcular">Calcular</button>
+  </div>
+
+  <!-- Imagem que aparece logo abaixo dos inputs -->
+  <div id="containerFoto" style="display: none; margin-top: 15px;">
+    <img id="fotoImg" src="foto.png" alt="Foto" style="max-width: 400px; display: block;">
+  </div>
+
+  <!-- Pop-up de Opções -->
+  <dialog id="modalOpcoes" style="border: 3px solid black; background-color: #c0c0c0; font-family: 'Comic Sans MS', 'Times New Roman', cursive; padding: 15px; border-radius: 0; box-shadow: none;">
+    <h3 style="margin-top: 0; color: #b30000; font-size: 18px;">larper do ano</h3>
+    <button id="btnSite" style="border: 2px outset #ffffff; background: #e0e0e0; padding: 4px 8px; cursor: pointer;">Ver resultado no site</button>
+    <button id="btnFoto" style="border: 2px outset #ffffff; background: #e0e0e0; padding: 4px 8px; cursor: pointer;">Ver foto</button>
+    <br><br>
+    <button id="btnFecharModal" style="font-size: 11px; border: 1px solid black; background: #bbb; cursor: pointer;">fechar</button>
+  </dialog>
+
+  <!-- Pop-up "tem certeza" -->
+  <dialog id="modalCerteza" style="border: 3px solid black; background-color: #c0c0c0; font-family: 'Comic Sans MS', 'Times New Roman', cursive; padding: 15px; border-radius: 0; box-shadow: none;">
+    <h3 style="margin-top: 0; color: #000; font-size: 18px;">tem certeza</h3>
+    <button id="btnSim" style="border: 2px outset #ffffff; background: #e0e0e0; padding: 4px 12px; cursor: pointer;">sim</button>
+    <button id="btnClaro" style="border: 2px outset #ffffff; background: #e0e0e0; padding: 4px 12px; cursor: pointer;">claro</button>
+  </dialog>
+
+  <script>
+    const btnCalcular = document.getElementById('btnCalcular');
+    const modalOpcoes = document.getElementById('modalOpcoes');
+    const modalCerteza = document.getElementById('modalCerteza');
+    const btnSite = document.getElementById('btnSite');
+    const btnFoto = document.getElementById('btnFoto');
+    const btnSim = document.getElementById('btnSim');
+    const btnClaro = document.getElementById('btnClaro');
+    const btnFecharModal = document.getElementById('btnFecharModal');
+    const containerFoto = document.getElementById('containerFoto');
+    const fotoImg = document.getElementById('fotoImg');
+
+    // Ao clicar em calcular, abre o primeiro pop-up
+    btnCalcular.addEventListener('click', () => {
+      modalOpcoes.showModal();
+    });
+
+    // Opção 1: fecha o primeiro pop-up e abre o "tem certeza"
+    btnSite.addEventListener('click', () => {
+      modalOpcoes.close();
+      modalCerteza.showModal();
+    });
+
+    // Opção "sim": redireciona para o site
+    btnSim.addEventListener('click', () => {
+      window.location.href = 'https://dvarakaki.github.io/aprovae-web/';
+    });
+
+    // Opção "claro": fecha o pop-up e mostra a foto com a iluminação bem estourada
+    btnClaro.addEventListener('click', () => {
+      modalCerteza.close();
+      fotoImg.style.filter = 'brightness(3.5) contrast(2) saturate(1.4)';
+      containerFoto.style.display = 'block';
+    });
+
+    // Opção 2: fecha o pop-up e faz a foto normal aparecer direto embaixo dos inputs
+    btnFoto.addEventListener('click', () => {
+      modalOpcoes.close();
+      fotoImg.style.filter = 'none';
+      containerFoto.style.display = 'block';
+    });
+
+    // Fechar modal
+    btnFecharModal.addEventListener('click', () => {
+      modalOpcoes.close();
+    });
+  </script>
+
+</body>
+</html>
